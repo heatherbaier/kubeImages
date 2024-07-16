@@ -25,7 +25,7 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     kubectl version --client
 
 # Install Prefect 2
-RUN pip install --ignore-installed prefect-kubernetes geopandas rasterio rioxarray scikit-learn
+RUN pip install --ignore-installed prefect-kubernetes geopandas rasterio rioxarray scikit-learn neo4j
 
 # Copy the current directory contents into the container at /app
 ADD . /app
