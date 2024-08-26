@@ -1,0 +1,33 @@
+# Use Bitnami's Neo4j base image
+FROM bitnami/neo4j:latest
+
+# Set environment variables for Neo4j authentication
+ENV NEO4J_AUTH=neo4j/12345678
+
+# Switch to root user
+USER root
+
+# Update package lists and install Python 3, pip, and venv
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip python3-venv && \
+    rm -rf /var/lib/apt/lists/
+
+# Create a directory for the virtual environment
+RUN mkdir -p /home/neo4j_venv
+
+# Create the virtual environment inside the container
+RUN python3 -m venv /home/neo4j_venv
+
+# Activate the virtual environment and install the Neo4j Python package
+RUN /bin/bash -c "source /home/neo4j_venv/bin/activate && pip install neo4j"
+
+USER 1001
+
+# Set the initial password using neo4j-admin and avoid the password change prompt
+RUN neo4j-admin dbms set-initial-password 12345678
+
+# Expose the Neo4j ports
+EXPOSE 7474 7687
+
+# Start Neo4j
+CMD ["bash"]
