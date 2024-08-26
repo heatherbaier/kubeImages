@@ -7,10 +7,10 @@ ENV NEO4J_AUTH=neo4j/12345678
 # Switch to root user
 USER root
 
-# Update package lists and install Python 3, pip, and venv
+# Update package lists and install Python 3, pip, venv, and curl
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip python3-venv && \
-    rm -rf /var/lib/apt/lists/
+    apt-get install -y python3 python3-pip python3-venv curl && \
+    rm -rf /var/lib/apt/lists/*
 
 # Create a directory for the virtual environment
 RUN mkdir -p /home/neo4j_venv
@@ -19,9 +19,10 @@ RUN mkdir -p /home/neo4j_venv
 RUN python3 -m venv /home/neo4j_venv
 
 # Activate the virtual environment and install the Neo4j Python package
-RUN /bin/bash -c "source /home/neo4j_venv/bin/activate && pip install neo4j"
+RUN /home/neo4j_venv/bin/pip install neo4j
 
-USER 1001
+# Set ownership of the virtual environment directory
+RUN chown -R 1001:1001 /home/neo4j_venv
 
 # Set the initial password using neo4j-admin and avoid the password change prompt
 RUN neo4j-admin dbms set-initial-password 12345678
@@ -29,5 +30,8 @@ RUN neo4j-admin dbms set-initial-password 12345678
 # Expose the Neo4j ports
 EXPOSE 7474 7687
 
-# Start Neo4j
+# Revert back to the Neo4j user (non-root)
+USER 1001
+
+# Start Neo4j with an infinite sleep for manual start
 CMD ["bash"]
