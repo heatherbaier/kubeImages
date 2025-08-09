@@ -32,6 +32,7 @@ RUN pip install --ignore-installed geopandas rasterio rioxarray scikit-learn neo
 RUN pip install --no-cache-dir git+https://github.com/heatherbaier/simba.git
 
 
+
 # Copy the current directory contents into the container at /app
 ADD . /app
 
