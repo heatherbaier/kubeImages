@@ -1,5 +1,7 @@
 # Use an official Python runtime as a parent image
-FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+# FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+FROM pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+
 
 # Set the working directory in the container
 WORKDIR /app
@@ -27,7 +29,7 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     kubectl version --client
 
 # Install Prefect 2
-RUN pip install --ignore-installed geopandas rasterio rioxarray scikit-learn neo4j psycopg2
+# RUN pip install --ignore-installed geopandas rasterio rioxarray scikit-learn
 
 RUN pip install --no-cache-dir git+https://github.com/heatherbaier/simba.git
 
