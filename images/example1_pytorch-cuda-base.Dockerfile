@@ -29,6 +29,8 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
 # Install Prefect 2
 RUN pip install --ignore-installed geopandas rasterio rioxarray scikit-learn neo4j psycopg2
 
+RUN pip install --no-cache-dir git+https://github.com/heatherbaier/simba.git
+
 # Copy the current directory contents into the container at /app
 ADD . /app
 
