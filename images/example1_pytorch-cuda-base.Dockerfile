@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM pytorch/pytorch:2.2.0-cuda11.0-cudnn8-devel
+FROM pytorch/pytorch:2.7.1-cuda11.8-cudnn9-devel
 # FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
 # FROM pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
 
