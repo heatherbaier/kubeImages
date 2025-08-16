@@ -29,9 +29,9 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     kubectl version --client
 
 # Install Prefect 2
-# RUN pip install --ignore-installed geopandas rasterio rioxarray scikit-learn
+RUN pip install --ignore-installed geopandas rasterio rioxarray scikit-learn haversine
 
-RUN pip install --no-cache-dir git+https://github.com/heatherbaier/simba.git
+# RUN pip install --no-cache-dir git+https://github.com/heatherbaier/simba.git
 
 
 
