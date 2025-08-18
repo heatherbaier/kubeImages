@@ -29,6 +29,10 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
     kubectl version --client
 
+
+RUN mkdir -p ~/pip_cache
+RUN export TMPDIR=~/pip_cache
+
 # Install Prefect 2
 RUN pip install --ignore-installed geopandas rasterio rioxarray scikit-learn haversine shapely rasterio rioxarray typer tqdm
 
